@@ -1,4 +1,4 @@
-<p align="center"><img width="400" src="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F873aa9bf5d8d4960abbee6d913862e1c"></p>
+<p align="center"><img width="400" src="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2Fdbfc9a73d8994ed3bca67bf2095bb7b8"></p>
 
 <p align="center">
   Compiled TypeScript. Generates Go, Swift, Kotlin, WASM, Binary
@@ -12,12 +12,6 @@
   <a href="https://www.npmjs.com/package/@ts-lite/core" rel="nofollow"><img src="https://img.shields.io/npm/v/@ts-lite/core.svg?sanitize=true"></a>
 </p>
 
-## Who uses it
-
-- [Builder.io](https://github.com/builderio/builder)
-- [JSX Lite](https://github.com/builderio/jsx-lite)
-- [Build.](https://github.com/builderio/build.)
-
 ## Status
 
 | Language | Status |
@@ -28,6 +22,12 @@
 | WASM     | WIP    |
 | LLVM     | WIP    |
 | Binary   | WIP    |
+
+## Who uses it
+
+- [Builder.io](https://github.com/builderio/builder)
+- [JSX Lite](https://github.com/builderio/jsx-lite)
+- [Build.](https://github.com/builderio/build.)
 
 ## Coming soon
 
