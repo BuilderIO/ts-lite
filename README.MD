@@ -12,7 +12,9 @@
   <a href="https://www.npmjs.com/package/@ts-lite/core" rel="nofollow"><img src="https://img.shields.io/npm/v/@ts-lite/core.svg?sanitize=true"></a>
 </p>
 
-<img src="https://imgur.com/bzsS7us.gif">
+<p align="center">
+  <img src="https://imgur.com/bzsS7us.gif">
+</p>
 
 ## Status
 
