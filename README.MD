@@ -1,7 +1,7 @@
 <p align="center"><img width="400" src="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F265056f48a654204a2491f1f10aa1785"></p>
 
 <p align="center">
-  Compiled TypeScript. Generates Go, Swift, Kotlin, WASM, Binary
+  Compiled TypeScript. Generates Go, Swift, Kotlin, WASM
 </p>
 
 <p align="center">
@@ -26,8 +26,6 @@ This package is highly experimental.
 | Swift    | WIP    |
 | Kotlin   | WIP    |
 | WASM     | WIP    |
-| LLVM     | WIP    |
-| Binary   | WIP    |
 
 ## Who uses it
 
