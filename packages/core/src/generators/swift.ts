@@ -25,6 +25,12 @@ export const types = {
   NumericLiteral(node: ts.NumericLiteral) {
     return node.getText();
   },
+  BooleanLiteral(node: ts.BooleanLiteral) {
+    return node.getText();
+  },
+  StringLiteral(node: ts.StringLiteral) {
+    return `"${node.text}"`;
+  },
   ReturnStatement(node: ts.ReturnStatement) {
     return `return ${node.expression ? this.Node(node.expression) : ''}`;
   },
