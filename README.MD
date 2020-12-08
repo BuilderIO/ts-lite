@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://imgur.com/bzsS7us.gif">
+  <img src="https://imgur.com/q0XX5eb.gif">
 </p>
 
 ## Status

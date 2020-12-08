@@ -12,7 +12,7 @@ import { useLocalObservable, useObserver } from 'mobx-react-lite';
 import * as monaco from 'monaco-editor';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import React, { useState } from 'react';
-import { toSwift } from '@ts-lite/core';
+import { toSwift, toGo, toKotlin } from '@ts-lite/core';
 import MonacoEditor from 'react-monaco-editor';
 import githubLogo from '../assets/GitHub-Mark-Light-64px.png';
 import logo from '../assets/ts-lite-logo-white.png';
@@ -83,10 +83,12 @@ monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
 });
 
 // TODO: add this
-// monaco.languages.typescript.typescriptDefaults.addExtraLib(
-//   types,
-//   `file:///node_modules/@react/types/index.d.ts`,
-// );
+monaco.languages.typescript.typescriptDefaults.addExtraLib(
+  `
+    declare type Int = number;
+  `,
+  'ts:filename/index.d.ts'
+);
 
 // TODO: Build this Fiddle app with TS Lite :)
 export default function Fiddle() {
@@ -109,7 +111,12 @@ export default function Fiddle() {
         state.pendingBuilderChange = null;
         staticState.ignoreNextBuilderUpdate = true;
         // TODO
-        state.output = toSwift(state.code);
+        state.output =
+          state.outputTab === 'swift'
+            ? toSwift(state.code)
+            : state.outputTab === 'go'
+            ? toGo(state.code)
+            : toKotlin(state.code);
       } catch (err) {
         if (debug) {
           throw err;
@@ -445,7 +452,7 @@ export default function Fiddle() {
                 <Tab label="Swift" value="swift" />
                 <Tab label="Go" value="go" />
                 <Tab label="Kotlin" value="kotlin" />
-                <Tab label="WASM" value="wasm" />
+                {/* <Tab label="WASM" value="wasm" /> */}
               </Tabs>
             </div>
             <div

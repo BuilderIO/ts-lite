@@ -8,7 +8,7 @@ export function toSwift(code: string, options = {}) {
   return format(types.SourceFile(parsed));
 }
 
-export const types = {
+const types = {
   SourceFile(node: ts.SourceFile): string {
     return node.statements.map((statement) => this.Node(statement)).join('\n');
   },
