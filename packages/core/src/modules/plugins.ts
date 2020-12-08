@@ -1,11 +1,11 @@
-import { JSXLiteComponent } from '../types/ts-lite-component';
+import { SourceFile } from 'typescript';
 
 export type Plugin = {
   json?: {
     // Happens before any modifiers
-    pre?: (json: JSXLiteComponent) => JSXLiteComponent | void;
+    pre?: (json: SourceFile) => SourceFile | void;
     // Happens after built in modifiers
-    post?: (json: JSXLiteComponent) => JSXLiteComponent | void;
+    post?: (json: SourceFile) => SourceFile | void;
   };
   code?: {
     // Happens before formatting
@@ -15,10 +15,7 @@ export type Plugin = {
   };
 };
 
-export const runPreJsonPlugins = (
-  json: JSXLiteComponent,
-  plugins: Plugin[],
-) => {
+export const runPreJsonPlugins = (json: SourceFile, plugins: Plugin[]) => {
   let useJson = json;
   for (const plugin of plugins) {
     const preFunction = plugin.json?.pre;
@@ -29,10 +26,7 @@ export const runPreJsonPlugins = (
   return useJson;
 };
 
-export const runPostJsonPlugins = (
-  json: JSXLiteComponent,
-  plugins: Plugin[],
-) => {
+export const runPostJsonPlugins = (json: SourceFile, plugins: Plugin[]) => {
   let useJson = json;
   for (const plugin of plugins) {
     const postFunction = plugin.json?.post;
