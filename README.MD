@@ -14,6 +14,8 @@
 
 ## Status
 
+This package is highly experimental.
+
 | Language | Status |
 | -------- | ------ |
 | Go       | WIP    |
@@ -24,6 +26,8 @@
 | Binary   | WIP    |
 
 ## Who uses it
+
+Don't use this for production today. The below use cases are what we are building this for:
 
 - [Builder.io](https://github.com/builderio/builder)
 - [JSX Lite](https://github.com/builderio/jsx-lite)

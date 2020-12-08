@@ -22,7 +22,7 @@
     "name": "Builder.io",
     "url": "https://www.builder.io"
   },
-  "version": "0.0.2-0",
+  "version": "0.0.2",
   "homepage": "https://github.com/BuilderIO/ts-lite",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
