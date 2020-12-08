@@ -11,8 +11,8 @@ import { Alert } from '@material-ui/lab';
 import { useLocalObservable, useObserver } from 'mobx-react-lite';
 import * as monaco from 'monaco-editor';
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import types from 'raw-loader!@ts-lite/core/dist/jsx';
 import React, { useState } from 'react';
+import { toSwift } from '@ts-lite/core';
 import MonacoEditor from 'react-monaco-editor';
 import githubLogo from '../assets/GitHub-Mark-Light-64px.png';
 import logo from '../assets/ts-lite-logo-white.png';
@@ -82,20 +82,19 @@ monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
   noSyntaxValidation: false,
 });
 
-monaco.languages.typescript.typescriptDefaults.addExtraLib(
-  types,
-  `file:///node_modules/@react/types/index.d.ts`,
-);
+// TODO: add this
+// monaco.languages.typescript.typescriptDefaults.addExtraLib(
+//   types,
+//   `file:///node_modules/@react/types/index.d.ts`,
+// );
 
 // TODO: Build this Fiddle app with TS Lite :)
 export default function Fiddle() {
   const [staticState] = useState(() => ({
     ignoreNextBuilderUpdate: false,
   }));
-  const [builderData, setBuilderData] = useState<any>(null);
   const state = useLocalObservable(() => ({
     code: getQueryParam('code') || defaultCode,
-    inputCode: defaultLiquidCode,
     output: '',
     outputTab: getQueryParam('outputTab') || 'vue',
     pendingBuilderChange: null as any,
@@ -110,7 +109,7 @@ export default function Fiddle() {
         state.pendingBuilderChange = null;
         staticState.ignoreNextBuilderUpdate = true;
         // TODO
-        // state.output = parse(state.code)
+        state.output = toSwift(state.code);
       } catch (err) {
         if (debug) {
           throw err;
@@ -120,15 +119,6 @@ export default function Fiddle() {
       }
     },
   }));
-
-  useEventListener<KeyboardEvent>(document.body, 'keydown', (e) => {
-    // Cancel cmd+s, sometimes people hit it instinctively when editing code and the browser
-    // "save webpage" dialog is unwanted and annoying
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-      e.preventDefault();
-      state.applyPendingBuilderChange();
-    }
-  });
 
   useEventListener<MouseEvent>(document.body, 'mousemove', (e) => {
     if (state.isDraggingJSXCodeBar) {
@@ -242,9 +232,9 @@ export default function Fiddle() {
                 alt="TS Lite Logo"
                 src={logo}
                 css={{
-                  marginLeft: 10,
+                  marginLeft: 20,
                   objectFit: 'contain',
-                  width: 200,
+                  width: 130,
                   height: 60,
                   ...lightColorInvert,
                 }}
@@ -416,79 +406,76 @@ export default function Fiddle() {
               css={{
                 display: 'flex',
                 alignItems: 'center',
-                flexDirection: 'row-reverse',
+                height: 40,
+                padding: 5,
+                flexShrink: 0,
+                borderBottom: `1px solid ${colors.contrast}`,
+                [smallBreakpoint]: {
+                  borderTop: `1px solid ${colors.contrast}`,
+                },
+                ...barStyle,
               }}
             >
-              <div
+              <Typography
+                variant="body2"
                 css={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'stretch',
-                  // height: 40,
-                  padding: 5,
-                  flexShrink: 0,
-                  borderLeft: `1px solid ${colors.contrast}`,
-                  [smallBreakpoint]: {
-                    borderTop: `1px solid ${colors.contrast}`,
-                  },
-                  ...barStyle,
+                  flexGrow: 1,
+                  textAlign: 'left',
+                  opacity: 0.7,
+                  paddingLeft: 10,
                 }}
               >
-                <Typography
-                  variant="body2"
-                  css={{
-                    textAlign: 'center',
-                    opacity: 0.7,
-                    paddingLeft: 10,
-                  }}
-                >
-                  Outputs:
-                </Typography>
-                <Tabs
-                  variant="scrollable"
-                  orientation="vertical"
-                  value={state.outputTab}
-                  css={{
-                    maxHeight: `calc(${state.outputsTabHeight}vh - 100px)`,
-                  }}
-                  onChange={(e, value) => (state.outputTab = value)}
-                  indicatorColor="primary"
-                  textColor="primary"
-                >
-                  <Tab label="Swift" value="swift" />
-                  <Tab label="Go" value="go" />
-                  <Tab label="Kotlin" value="kotlin" />
-                  <Tab label="WARM" value="wasm" />
-                </Tabs>
-              </div>
-              <div
-                css={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+                Outputs:
+              </Typography>
+              <Tabs
+                variant="scrollable"
+                value={state.outputTab}
+                css={{
+                  minHeight: 0,
+                  marginLeft: 'auto',
+                  '& button': {
+                    minHeight: 0,
+                    minWidth: 100,
+                  },
+                }}
+                onChange={(e, value) => (state.outputTab = value)}
+                indicatorColor="primary"
+                textColor="primary"
               >
-                <div css={{ flexGrow: 1 }}>
-                  <div css={{ paddingTop: 15 }}>
-                    <MonacoEditor
-                      height={outputMonacoEditorSize}
-                      options={{
-                        automaticLayout: true,
-                        overviewRulerBorder: false,
-                        highlightActiveIndentGuide: false,
-                        foldingHighlight: false,
-                        renderLineHighlightOnlyWhenFocus: true,
-                        occurrencesHighlight: false,
-                        readOnly: getQueryParam('readOnly') !== 'false',
-                        minimap: { enabled: false },
-                        renderLineHighlight: 'none',
-                        selectionHighlight: false,
-                        scrollbar: { vertical: 'hidden' },
-                      }}
-                      theme={monacoTheme}
-                      language={state.outputTab}
-                      value={state.output}
-                    />
-                  </div>
+                <Tab label="Swift" value="swift" />
+                <Tab label="Go" value="go" />
+                <Tab label="Kotlin" value="kotlin" />
+                <Tab label="WASM" value="wasm" />
+              </Tabs>
+            </div>
+            <div
+              css={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+            >
+              <div css={{ flexGrow: 1 }}>
+                <div css={{ paddingTop: 15 }}>
+                  <MonacoEditor
+                    height={outputMonacoEditorSize}
+                    options={{
+                      automaticLayout: true,
+                      overviewRulerBorder: false,
+                      highlightActiveIndentGuide: false,
+                      foldingHighlight: false,
+                      renderLineHighlightOnlyWhenFocus: true,
+                      occurrencesHighlight: false,
+                      readOnly: getQueryParam('readOnly') !== 'false',
+                      minimap: { enabled: false },
+                      renderLineHighlight: 'none',
+                      selectionHighlight: false,
+                      scrollbar: { vertical: 'hidden' },
+                    }}
+                    theme={monacoTheme}
+                    language={state.outputTab}
+                    value={state.output}
+                  />
                 </div>
               </div>
             </div>
+
             <Show when={!device.small}>
               <div
                 css={{
