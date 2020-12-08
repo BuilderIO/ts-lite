@@ -12,12 +12,6 @@
   <a href="https://www.npmjs.com/package/@ts-lite/core" rel="nofollow"><img src="https://img.shields.io/npm/v/@ts-lite/core.svg?sanitize=true"></a>
 </p>
 
-## Who uses it
-
-- [Builder.io](https://github.com/builderio/builder)
-- [JSX Lite](https://github.com/builderio/jsx-lite)
-- [Build.](https://github.com/builderio/build.)
-
 ## Status
 
 | Language | Status |
@@ -28,6 +22,12 @@
 | WASM     | WIP    |
 | LLVM     | WIP    |
 | Binary   | WIP    |
+
+## Who uses it
+
+- [Builder.io](https://github.com/builderio/builder)
+- [JSX Lite](https://github.com/builderio/jsx-lite)
+- [Build.](https://github.com/builderio/build.)
 
 ## Coming soon
 
