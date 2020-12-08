@@ -57,23 +57,6 @@ export const types = {
       node.thenStatement,
     )}`;
   },
-  Node(node: ts.Node): string {
-    for (const key in this) {
-      if (key === 'Node') {
-        continue;
-      }
-      const checker = (ts as any)[`is${key}`];
-      if (checker) {
-        if (checker(node)) {
-          console.log('running', key);
-          return (this as any)[key](node);
-        }
-      }
-    }
-
-    console.warn(`Node type not found for node ${node.kind}`, node);
-    return `/* Unsupported node type: ${node.kind} */`;
-  },
   Parameter(node: ts.ParameterDeclaration) {
     return `${node.name.getText()}${
       node.type ? `: ${node.type.getText()}` : ''
@@ -89,5 +72,21 @@ export const types = {
           .map((statement) => this.Node(statement))
           .join('\n')}
       }`;
+  },
+  Node(node: ts.Node): string {
+    for (const key in this) {
+      if (key === 'Node') {
+        continue;
+      }
+      const checker = (ts as any)[`is${key}`];
+      if (checker) {
+        if (checker(node)) {
+          return (this as any)[key](node);
+        }
+      }
+    }
+
+    console.warn(`Node type not found for node ${node.kind}`, node);
+    return `/* Unsupported node type: ${node.kind} */`;
   },
 };
