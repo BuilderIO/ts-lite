@@ -1,0 +1,41 @@
+{
+  "name": "@ts-lite/repo",
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "scripts": {
+    "postinstall": "lerna link",
+    "prettier": "prettier --parser=typescript 'packages/**/*.ts{,x}'",
+    "build": "lerna run --parallel 'build'",
+    "commit": "git-cz",
+    "fix": "run-p -c 'lint:* --fix'",
+    "lint:css": "stylelint 'packages/**/*.ts{,x}'",
+    "lint:ts": "eslint 'packages/**/*.ts{,x}'",
+    "lint": "run-p -c lint:*",
+    "prerelease": "npm run build",
+    "release": "lerna publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BuilderIO/ts-lite"
+  },
+  "resolutions": {
+    "babel-core": "^7.0.0-bridge.0"
+  },
+  "devDependencies": {
+    "commitizen": "^3.0.2",
+    "lerna": "^3.4.0",
+    "moment": "^2.22.2",
+    "prettier": "^1.19.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.6"
+  }
+}
