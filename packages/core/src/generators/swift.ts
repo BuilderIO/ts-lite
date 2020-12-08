@@ -1,10 +1,11 @@
 import dedent from 'dedent';
 import * as ts from 'typescript';
+import { format } from '../helpers/format';
 import { parse } from '../parsers/ts';
 
 export function toSwift(code: string, options = {}) {
   const parsed = parse(code);
-  return types.SourceFile(parsed);
+  return format(types.SourceFile(parsed));
 }
 
 export const types = {
@@ -24,13 +25,37 @@ export const types = {
   NumericLiteral(node: ts.NumericLiteral) {
     return node.getText();
   },
+  ReturnStatement(node: ts.ReturnStatement) {
+    return `return ${node.expression ? this.Node(node.expression) : ''}`;
+  },
+  Block(node: ts.Block) {
+    // TODO
+    return dedent`{
+      ${node.statements.map((statement) => this.Node(statement)).join('\n')}
+    }`;
+  },
+  BinaryExpression(node: ts.BinaryExpression) {
+    return `${this.Node(node.left)} ${node.operatorToken.getText()} ${this.Node(
+      node.right,
+    )}`;
+  },
   Identifier(node: ts.Identifier) {
     return node.getText();
   },
+  ExpressionStatement(node: ts.ExpressionStatement) {
+    return this.Node(node.expression);
+  },
+  WhileStatement(node: ts.WhileStatement) {
+    return `while ${this.Node(node.expression)} ${this.Node(node.statement)}`;
+  },
+  PrefixUnaryExpression(node: ts.PrefixUnaryExpression) {
+    // TODo: operator map
+    return `${node.operator === 46 ? '--' : '++'}${this.Node(node.operand)}`;
+  },
   IfStatement(node: ts.IfStatement) {
-    return dedent`if ${this.Node(node.expression)} {
-      ${node.thenStatement}
-    }`
+    return dedent`if ${this.Node(node.expression)} ${this.Node(
+      node.thenStatement,
+    )}`;
   },
   Node(node: ts.Node): string {
     for (const key in this) {
