@@ -1,32 +1,35 @@
-export const preSpaceRegex = /^ */g;
-export const getPreSpaces = (str: string) =>
-  str.match(preSpaceRegex)?.[0].length || 0;
+const preSpaceRegex = /^\s*/g;
 
-// TODO: make an option when needed
-const INDENT_SPACES = 2;
+const DEFAULT_INDENT_SPACES = 2;
 
-export const format = (str: string) => {
+/**
+ * Generic formatter for languages prettier doesn't support, like Swift
+ *
+ * Not super sophisticated, but much better than nothing
+ */
+export const format = (str: string, indentSpaces = DEFAULT_INDENT_SPACES) => {
+  let currentIndent = 0;
   const lines = str.split('\n');
   lines.forEach((item, index) => {
-    const spaces = getPreSpaces(item);
-    if (item.trim() === '}') {
-      lines[index] = item.replace(
-        preSpaceRegex,
-        ' '.repeat(spaces - INDENT_SPACES),
-      );
-    }
+    item = item.trimEnd();
+
+    lines[index] = item.replace(
+      preSpaceRegex,
+      ' '.repeat(currentIndent * indentSpaces),
+    );
+
     const nextLine = lines[index + 1];
     if (!nextLine) {
       return;
     }
-    const nextSpaces = item.match(/[})]$/)
-      ? spaces - INDENT_SPACES
-      : item.match(/[({]$/)
-      ? spaces + INDENT_SPACES
-      : spaces;
 
-    const newNextItem = nextLine.replace(preSpaceRegex, ' '.repeat(nextSpaces));
-    lines[index + 1] = newNextItem;
+    if (nextLine.match(/^\s*[})][,;]?\s*$/)) {
+      currentIndent--;
+    } else if (item.match(/[({]$/)) {
+      currentIndent++;
+    }
+
+    currentIndent = Math.max(currentIndent, 0);
   });
-  return lines.join('\n');
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n');
 };
