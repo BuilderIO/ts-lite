@@ -4,7 +4,6 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  plugins: ['@ts-lite'],
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [],
   parserOptions: {
@@ -15,7 +14,5 @@ module.exports = {
     },
   },
 
-  rules: {
-    // '@ts-lite/no-conditional-render': 'warn',
-  },
+  rules: {},
 };

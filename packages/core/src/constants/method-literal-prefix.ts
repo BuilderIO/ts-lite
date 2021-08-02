@@ -1,1 +1,1 @@
-export const methodLiteralPrefix = `@ts-lite/method:`;
+export const methodLiteralPrefix = `@builder.io/ts-lite/method:`;

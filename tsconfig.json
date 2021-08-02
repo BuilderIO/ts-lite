@@ -12,7 +12,6 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "@ts-lite/*": ["packages/*/src"],
       "*": ["node_modules", "packages"]
     }
   },

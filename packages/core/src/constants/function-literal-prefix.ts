@@ -1,1 +1,1 @@
-export const functionLiteralPrefix = `@ts-lite/function:`;
+export const functionLiteralPrefix = `@builder.io/ts-lite/function:`;

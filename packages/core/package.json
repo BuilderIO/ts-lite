@@ -1,5 +1,5 @@
 {
-  "name": "@ts-lite/core",
+  "name": "@builder.io/ts-lite",
   "description": "Write components once, run everywhere. Compiles to Vue, React, Solid, and Liquid. Import code from Figma and Builder.io",
   "keywords": [
     "jsx",
@@ -22,7 +22,7 @@
     "name": "Builder.io",
     "url": "https://www.builder.io"
   },
-  "version": "0.0.2",
+  "version": "0.0.1",
   "homepage": "https://github.com/BuilderIO/ts-lite",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -66,7 +66,6 @@
   },
   "devDependencies": {
     "@builder.io/sdk": "^1.1.20",
-    "@ts-lite/eslint-plugin": "../eslint-plugin",
     "@testing-library/jest-dom": "^5.11.5",
     "@types/babel__core": "^7.1.12",
     "@types/dedent": "^0.7.0",

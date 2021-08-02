@@ -8,10 +8,7 @@
     "skipDefaultLibCheck": true,
     "esModuleInterop": true,
     "target": "ES5",
-    "baseUrl": ".",
-    "paths": {
-      "@ts-lite/core": ["./src"]
-    }
+    "baseUrl": "."
   },
   "include": ["./src"]
 }

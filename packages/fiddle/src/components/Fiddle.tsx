@@ -12,7 +12,7 @@ import { useLocalObservable, useObserver } from 'mobx-react-lite';
 import * as monaco from 'monaco-editor';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import React, { useState } from 'react';
-import { toSwift, toGo, toKotlin } from '@ts-lite/core';
+import { toSwift, toGo, toKotlin } from '@builder.io/ts-lite';
 import MonacoEditor from 'react-monaco-editor';
 import githubLogo from '../assets/GitHub-Mark-Light-64px.png';
 import logo from '../assets/ts-lite-logo-white.png';

@@ -17,9 +17,6 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   modulePathIgnorePatterns: ['dist'],
-  moduleNameMapper: {
-    '@ts-lite/(.+)$': '<rootDir>packages/$1/src',
-  },
   notify: true,
   notifyMode: 'always',
   roots: ['<rootDir>packages'],

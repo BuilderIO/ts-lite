@@ -1,12 +1,12 @@
 {
-  "name": "@ts-lite/fiddle",
+  "name": "@builder.io/ts-lite-fiddle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
+    "@builder.io/ts-lite": "0.0.1",
     "@emotion/babel-preset-css-prop": "^10.2.1",
     "@emotion/core": "^10.1.1",
-    "@ts-lite/core": "^0.0.4-4",
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",

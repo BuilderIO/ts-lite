@@ -4,10 +4,7 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@ts-lite/*": ["./node_modules/@ts-lite/*/src"]
-    }
+    "skipLibCheck": true
   },
   "exclude": ["**/*.story.*", "**/*.test.*", "dist"],
   "include": []

@@ -8,8 +8,8 @@
   <a href="https://github.com/prettier/prettier"><img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" /></a>
   <a href="https://github.com/BuilderIO/ts-lite/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" /></a>
   <a href="https://github.com/BuilderIO/ts-lite"><img alt="License" src="https://img.shields.io/github/license/BuilderIO/ts-lite" /></a>
-  <a href="https://www.npmjs.com/package/@ts-lite/core"><img alt="Types" src="https://img.shields.io/npm/types/@ts-lite/core" /></a>
-  <a href="https://www.npmjs.com/package/@ts-lite/core" rel="nofollow"><img src="https://img.shields.io/npm/v/@ts-lite/core.svg?sanitize=true"></a>
+  <a href="https://www.npmjs.com/package/@builder.io/ts-lite"><img alt="Types" src="https://img.shields.io/npm/types/@builder.io/ts-lite" /></a>
+  <a href="https://www.npmjs.com/package/@builder.io/ts-lite" rel="nofollow"><img src="https://img.shields.io/npm/v/@builder.io/ts-lite.svg?sanitize=true"></a>
 </p>
 
 <p align="center">

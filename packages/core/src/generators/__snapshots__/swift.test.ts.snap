@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can generate some swift 1`] = `
+"func fib(index: Int) -> Int {
+  var n = index
+  var a = 0
+  var b = 1
+  if n > 0 {
+    while --n {
+      var t = a + b
+      a = b
+      b = t
+    }
+    return b
+  }
+  return a
+}"
+`;
